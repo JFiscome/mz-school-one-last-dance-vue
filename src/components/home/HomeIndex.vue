@@ -1,5 +1,5 @@
 <template>
- <div>HomeIndex</div>
+ <div>HomeIndex fan brother very handsome</div>
 </template>
 
 <script>
