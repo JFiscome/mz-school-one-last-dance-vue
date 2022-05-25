@@ -1,0 +1,78 @@
+.home-container {
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 让子元素里面的所有内容 */
+/* 垂直方向居中 */
+/* 水平方向居中 */
+/* 主轴方向为竖直向下 */
+.child-verticle-horizontal-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 让子元素里面的所有内容 */
+/* 垂直方向居中 */
+/* 水平方向居中 */
+/* 主轴方向为水平向右 */
+.child-verticle-horizontal-center-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.container {
+  width: 750px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+/* 让子元素里面的所有内容 */
+/* 垂直方向居中 */
+/* 水平方向居中 */
+/* 主轴方向为竖直向下 */
+.child-verticle-horizontal-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 让子元素里面的所有内容 */
+/* 垂直方向居中 */
+/* 水平方向居中 */
+/* 主轴方向为水平向右 */
+.child-verticle-horizontal-center-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 让子元素在水平方向上evenly */
+/*  垂直方向居中*/
+.child-verticle-evenly-horizontal-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+/* 让子元素在水平方向上between */
+/*  垂直方向居中*/
+.child-verticle-between-horizontal-center {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
