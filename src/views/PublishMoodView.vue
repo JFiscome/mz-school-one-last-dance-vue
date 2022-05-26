@@ -11,8 +11,9 @@
       />
     </div>
     <div class="categoryBox">
-      <div class="categoryItem" v-for="item in categoryList" :key="item.index">
-        <van-icon :name="item.icon" size="18px"/>&nbsp;{{ item.text }}
+      <div class="categoryItem" v-for="item in categoryList" :key="item.cid">
+        <van-icon :name="item.icon" size="18px"/>&nbsp;{{ item.title }}
+        <div class="redPoint" v-if="item.hasDot === 1"></div>
       </div>
       <van-icon class="categoryItem" size="18px" name="add-o" />
     </div>
@@ -33,35 +34,40 @@
           <div class="optionText">{{ item.text }}</div>
         </div>
       </div>
-      <button class="publishBtn">立即发布</button>
+      <button @click="handleSubmit" class="publishBtn">立即发布</button>
     </div>
   </div>
 </template>
 
 <script>
+import { getCategoryList } from '@/utils/tools'
+
 export default {
   name: 'PublishMoodView',
   data () {
     return {
       content: '',
       imageList: [],
-      categoryList: [
-        { cid: 1, text: '美滋滋', icon: 'smile-o' },
-        { cid: 2, text: '难过', icon: 'smile-o' },
-        { cid: 3, text: '心酸', icon: 'smile-o' }
-      ],
+      categoryList: [],
       options: [
         { id: 1, text: '位置', icon: 'location' },
         { id: 2, text: '公开', icon: 'friends' }
       ]
     }
   },
+  created () {
+    this.getCategoryList()
+  },
   methods: {
     afterRead (file) {
       console.log(this.imageList)
     },
-    getCategoryList () {
-
+    async getCategoryList () {
+      const res = await getCategoryList()
+      this.categoryList = res
+    },
+    handleSubmit () {
+      console.log('点击了提交按钮')
     }
   }
 }
@@ -110,15 +116,16 @@ export default {
 .categoryBox{
   display: flex;
   width: 94%;
-  height: 200px;
   margin: 20px;
   padding: 20px;
   box-sizing: border-box;
+  flex-wrap: wrap;
   border-radius: 10px;
   background-color: rgba(255,255,255,.2);
 
 }
 .categoryItem{
+  position: relative;
   height: 34px;
   border-radius: 10px;
   font-size: 24px;
@@ -126,10 +133,19 @@ export default {
   justify-content: center;
   align-items: center;
   background-color: #1DC9A0;
-  padding: 6px 10px;
+  padding: 6px 8px;
   margin: 4px;
   color: #FFFFFF;
   font-weight: bold;
+}
+.redPoint{
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  width: 12px;
+  height: 12px;
+  background-color: red;
+  border-radius: 50%;
 }
 /* 图片区域 */
 .photoBox{
@@ -164,6 +180,7 @@ export default {
   margin-top: 2px;
   color: #ffffff;
 }
+
 /* 发布按钮 */
 /* From uiverse.io by @hannahyockel */
 .publishBtn {
