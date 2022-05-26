@@ -3,7 +3,7 @@
     <div class="moodTitle" >发布您今天的心情</div>
     <div class="contentBox">
       <van-field class="content"
-        v-model="message"
+        v-model="content"
         rows="10"
         autosize
         type="textarea"
@@ -11,8 +11,8 @@
       />
     </div>
     <div class="categoryBox">
-      <div class="categoryItem" v-for="item in 2" :key="item">
-        <van-icon name="smile-o" size="18px"/>&nbsp;美滋滋
+      <div class="categoryItem" v-for="item in categoryList" :key="item.index">
+        <van-icon :name="item.icon" size="18px"/>&nbsp;{{ item.text }}
       </div>
       <van-icon class="categoryItem" size="18px" name="add-o" />
     </div>
@@ -43,14 +43,12 @@ export default {
   name: 'PublishMoodView',
   data () {
     return {
-      message: '',
+      content: '',
       imageList: [],
-      show: true,
-      showPopover: false,
-      actions: [
-        { text: '选项一', icon: 'add-o' },
-        { text: '选项二', icon: 'music-o' },
-        { text: '选项三', icon: 'more-o' }
+      categoryList: [
+        { cid: 1, text: '美滋滋', icon: 'smile-o' },
+        { cid: 2, text: '难过', icon: 'smile-o' },
+        { cid: 3, text: '心酸', icon: 'smile-o' }
       ],
       options: [
         { id: 1, text: '位置', icon: 'location' },
@@ -62,8 +60,8 @@ export default {
     afterRead (file) {
       console.log(this.imageList)
     },
-    close () {
-      this.show = false
+    getCategoryList () {
+
     }
   }
 }
@@ -75,7 +73,7 @@ export default {
   height: 100vh;
   display: flex;
   background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%);
-  /*background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);  */
+  /*background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);*/
   flex-direction: column;
   align-items: center;
 }
@@ -94,12 +92,18 @@ export default {
   width: 94%;
   padding: 10px;
   margin-top: 20px;
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.1);
-  background-color: white;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,0.2);
   box-sizing: border-box;
 }
 .content{
   font-size: 20px;
+  background-color: rgba(255,255,255,0);
+}
+::v-deep .van-field__control::-webkit-input-placeholder {
+  color: #4bba9b;
+  font-size: 0.2rem;
+  font-weight: 600;
 }
 
 /* 分类区域 */
@@ -110,8 +114,9 @@ export default {
   margin: 20px;
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.1);
-  background-color: white;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,.2);
+
 }
 .categoryItem{
   height: 34px;
@@ -120,7 +125,7 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #5adcb6;
+  background-color: #1DC9A0;
   padding: 6px 10px;
   margin: 4px;
   color: #FFFFFF;
@@ -131,8 +136,8 @@ export default {
   width: 94%;
   padding: 20px;
   box-sizing: border-box;
-  box-shadow: 0px 0px 6px 0px rgba(0,0,0,0.1);
-  background-color: white;
+  border-radius: 10px;
+  background-color: rgba(255,255,255,.2);
 }
 .photo{
   padding-left: 8px;
