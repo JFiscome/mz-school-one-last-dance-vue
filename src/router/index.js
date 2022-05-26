@@ -72,6 +72,14 @@ const routes = [
     meta: {
       title: '抗击疫情'
     }
+  },
+  {
+    path: '/publishmood',
+    name: 'publishmood',
+    component: () => import('@/views/PublishMoodView'),
+    meta: {
+      title: '发布心情'
+    }
   }
 ]
 
