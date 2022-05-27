@@ -12,3 +12,15 @@ export async function fightEpidemic () {
     url: 'fight/epidemic'
   })
 }
+
+export async function getBannerList () {
+  return await axiosInstance({
+    url: 'banner/list'
+  })
+}
+
+export async function getCateInfo () {
+  return await axiosInstance({
+    url: 'category/list'
+  })
+}

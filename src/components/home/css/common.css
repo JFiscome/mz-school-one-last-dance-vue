@@ -5,6 +5,13 @@
   align-items: center;
 }
 
+.round-box {
+  border-radius: 20px;
+  box-shadow: 2px 2px 4px #888;
+  overflow: hidden;
+  background-color: #fff;
+}
+
 /* 让子元素里面的所有内容 */
 /* 垂直方向居中 */
 /* 水平方向居中 */
@@ -27,13 +34,6 @@
   justify-content: center;
 }
 
-.container {
-  width: 750px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 50px;
-}
 
 /* 让子元素里面的所有内容 */
 /* 垂直方向居中 */
