@@ -6,6 +6,8 @@ import BottomText from '@/commonCommonponents/BottomText'
 import TopHeader from '@/commonCommonponents/TopHeader'
 import FanLoading from '@/commonCommonponents/FanLoading'
 
+// 偷懒-把所有组件都引入了
+
 import '@/utils/permission'
 
 import Vant from 'vant'

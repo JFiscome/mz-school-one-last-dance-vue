@@ -33,7 +33,7 @@
             p-id="3400"
           ></path>
         </svg>
-        <div class="top-title">湄职院</div>
+        <div class="top-title">【湄洲湾】职业技术学院</div>
       </div>
       <svg
         t="1653634111239"
@@ -130,7 +130,7 @@ export default {
 .top-title {
   font-size: 36px;
   font-weight: 600;
-  margin-left: 14px;
+  margin-left: 6px;
 }
 
 .banner-container {

@@ -80,6 +80,14 @@ const routes = [
     meta: {
       title: '发布心情'
     }
+  },
+  {
+    path: '/publish-mood-new',
+    name: 'publishmoodnew',
+    component: () => import('@/views/PublishMoodNewView'),
+    meta: {
+      title: '发布心情'
+    }
   }
 ]
 

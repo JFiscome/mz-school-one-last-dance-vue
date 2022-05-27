@@ -40,7 +40,6 @@
 </template>
 
 <script>
-import { getCategoryList } from '@/utils/tools'
 
 export default {
   name: 'PublishMoodView',
@@ -56,16 +55,13 @@ export default {
     }
   },
   created () {
-    this.getCategoryList()
+
   },
   methods: {
     afterRead (file) {
       console.log(this.imageList)
     },
-    async getCategoryList () {
-      const res = await getCategoryList()
-      this.categoryList = res
-    },
+
     handleSubmit () {
       console.log('点击了提交按钮')
     }
