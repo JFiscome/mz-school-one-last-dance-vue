@@ -24,3 +24,23 @@ export async function getCateInfo () {
     url: 'category/list'
   })
 }
+
+/**
+ * 发布心情
+ * @param cid 分类id
+ * @param content 发布内容
+ * @param pics 发布图片集合
+ * @returns {Promise<AxiosResponse<any>>}
+ */
+export async function publishMood (cid, content, pics) {
+  const res = await axiosInstance({
+    url: 'article/create',
+    method: 'POST',
+    data: {
+      cid,
+      content,
+      pics
+    }
+  })
+  return res
+}

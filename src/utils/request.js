@@ -34,7 +34,9 @@ axiosInstance.interceptors.request.use(function (config) {
 axiosInstance.interceptors.response.use(function (response) {
   // 2xx 范围内的状态码都会触发该函数。
   // 对响应数据做点什么
-
+  if (response.request.responseURL === 'https://www.tideway.store/dance/v1/article/create') {
+    return response.data
+  }
   //   对成功的数据也可以进行处理
   return response.data.response
 }, function (error) {

@@ -2,7 +2,7 @@
   <div class="moodContainer">
     <div class="moodTitle" >
       <van-icon name="arrow-left" @click="handleBack" class="moodTitleArrow" size="20"></van-icon>
-      <div>发布您今天的心情</div>
+      <div>发布今天的心情</div>
     </div>
     <div class="contentBox">
       <van-field class="content"
@@ -14,7 +14,8 @@
       />
     </div>
     <div class="categoryBox">
-      <div class="category" :class="['categoryItem',{'hasSelectCate':cateIndex === item.cid}]" @click="handleClickCate(item.cid)" v-for="item in categoryList" :key="item.cid">
+      <div class="categoryItem cateTitle">选择分类标签</div>
+      <div :class="['categoryItem',{'hasSelectCate':cateIndex === item.cid}]" @click="handleClickCate(item.cid)" v-for="item in categoryList" :key="item.cid">
         <van-icon :name="item.icon" size="18px"/>&nbsp;{{ item.title }}
         <div class="redPoint" v-if="item.hasDot === 1"></div>
       </div>
@@ -42,7 +43,9 @@
 </template>
 
 <script>
-import { getCateInfo } from '@/api/home'
+import { getCateInfo, publishMood } from '@/api/home'
+import uploadFile from '@/utils/uploader'
+import { Toast } from 'vant'
 export default {
   name: 'PublishMoodView',
   data () {
@@ -66,19 +69,50 @@ export default {
     afterRead (file) {
       console.log(this.imageList)
     },
-    handleSubmit () {
-      console.log('点击了提交按钮')
+    // 点击提交按钮发布动态
+    async handleSubmit () {
+      if (this.content == null || this.content === '') {
+        Toast({ message: '发布的内容不能为空', position: 'top' })
+        return
+      }
+      if (this.cateIndex === -1) {
+        Toast({ message: '请选择一个分类标签', position: 'top' })
+        return
+      }
+      const images = this.imageList
+      const imageUrls = []
+      // 将图片上传到阿里云存储
+      if (images != null && images.length > 0) {
+        console.log('有图片进行上传')
+        for (let i = 0; i < images.length; i++) {
+          const url = await uploadFile(images[i])
+          imageUrls.push(url)
+        }
+      }
+      const imageUrlString = JSON.stringify(imageUrls)
+
+      // 发布心情
+      const res = await publishMood(this.cateIndex, this.content, imageUrlString)
+      if (res.message === 'ok') {
+        Toast({ message: '发布成功', type: 'success' })
+        console.log('发布的内容：' + this.cateIndex, this.content, imageUrlString)
+        this.content = ''
+        this.cateIndex = -1
+        // TODO 发布成功后是否跳转页面 （待完善）
+      }
     },
+    // 返回上一页
     handleBack () {
       this.$router.go(-1)
     },
+    // 切换背景
     handleClickCate (cid) {
       console.log(cid)
       this.cateIndex = cid
       var bg = 'background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%)'
       switch (cid) {
         case 9:
-          bg = 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);'
+          bg = 'background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);'
           break
         case 10:
           bg = 'background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);'
@@ -113,7 +147,8 @@ export default {
   width: 100%;
   min-height: 100vh;
   display: flex;
-  background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%);
+  /*background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%);*/
+  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
   /*background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);*/
   flex-direction: column;
   align-items: center;
@@ -170,8 +205,8 @@ export default {
   flex-wrap: wrap;
   border-radius: 10px;
   background-color: rgba(255,255,255,.2);
-
 }
+
 .categoryItem{
   position: relative;
   height: 34px;
@@ -189,6 +224,9 @@ export default {
 }
 .hasSelectCate{
   background: #16d95e;
+}
+.cateTitle{
+  background-color: rgba(0,0,0,0);
 }
 .redPoint{
   position: absolute;
