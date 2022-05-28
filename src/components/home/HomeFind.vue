@@ -1,32 +1,77 @@
 <template>
- <div class="findContainer">
-   <div class="findTopNavBar">
-     <img class="avatarImg" :src="userInfo.avatar" />
-     <div class="searchBox">
-       <van-search
-         class="searchText"
-         v-model="searchText"
-         background="rgba(0,0,0,0)"
-         left-icon="none"
-         placeholder="请输入搜索关键词"
-         right-icon="search"
-         shape="round"
-       />
-     </div>
-     <div class="messageBtn">
-       <van-icon class="msgIcon" name="chat-o" />
-     </div>
-   </div>
- </div>
+  <div class="findContainer">
+    <div class="findTopNavBar">
+      <img class="avatarImg" :src="userInfo.avatar"/>
+      <div class="searchBox">
+        <van-search
+          class="searchText"
+          v-model="searchText"
+          background="rgba(0,0,0,0)"
+          left-icon="none"
+          placeholder="请输入搜索关键词"
+          right-icon="search"
+          shape="round"
+        />
+      </div>
+      <div class="messageBtn">
+        <van-icon class="msgIcon" name="chat-o"/>
+      </div>
+    </div>
+
+    <find-title hot-title="校园交友"></find-title>
+
+    <div class="makeFriendsContainer">
+      <!--红人馆-->
+      <div class="friendItem">
+        <div class="friendTitle">红人馆</div>
+        <div class="friendInPlay">
+          <div class="friendPlayLeft">
+            <img class="friendImg" src="@/assets/imgs/fight/star.png" >
+            Luffy
+          </div>
+          <div class="friendPlayRight">
+            <van-icon color="red" name="fire" />16832
+          </div>
+        </div>
+      </div>
+      <!--交友墙-->
+      <div class="friendItem makeFriendBg">
+        <div class="friendTitle">交友墙</div>
+        <div class="friendInPlay">
+          <div class="friendPlayLeft">
+            Ta们正在线
+          </div>
+          <div class="friendPlayRight makeFriendRight">
+            <img class="friendImg makeFriendAva01" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg makeFriendAva02" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg makeFriendAva03" src="@/assets/imgs/fight/star.png" >
+          </div>
+        </div>
+      </div>
+      <!--一起玩-->
+      <div class="friendItem togetherPayBg">
+        <div class="friendTitle">一起去</div>
+        <div class="friendInPlay">
+          <div class="friendPlayLeft">
+            结伴去旅行
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 import { getDefaultAvatarUrl } from '@/utils/tools'
 import { getUserInfo } from '@/api/user'
 import { getJwtToken } from '@/utils/token'
+import FindTitle from '@/commonCommonponents/FindTitle'
 
 export default {
   name: 'HomeFind',
+  components: {
+    FindTitle
+  },
   data () {
     return {
       searchText: '',
@@ -55,25 +100,96 @@ export default {
 
 </script>
 <style scoped>
-.findContainer{
+.findContainer {
   width: 100%;
   min-height: 100vh;
 }
-.findTopNavBar{
+
+.findTopNavBar {
   display: flex;
   align-items: center;
-  padding: 10px;
+  padding: 20px 10px;
 }
-.avatarImg{
+
+.avatarImg {
   width: 50px;
   height: 50px;
   border-radius: 50%;
   margin: 0 20px;
 }
-.messageBtn{
+.searchText{
+  width: 500px !important;
+}
+.messageBtn {
   margin-left: auto;
 }
-.msgIcon{
+
+.msgIcon {
   margin-right: 20px;
+}
+
+/*校园交友*/
+.makeFriendsContainer{
+  display: flex;
+}
+.friendItem{
+  margin: 6px;
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  height: 140px;
+  padding: 30px 20px 10px 20px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  color: red;
+  background-image: linear-gradient(to right, #ffecd2 0%, #fcb69f 100%);
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+}
+.friendItem:active{
+  transform: scale(0.95);
+  transition: all 0.3s;
+}
+.friendImg{
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 4px;
+}
+.friendTitle{
+  font-weight: bold;
+  font-size: 30px;
+  margin-bottom: 20px;
+}
+.friendInPlay{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.friendPlayLeft{
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+}
+.friendPlayRight{
+  display: flex;
+  font-size: 20px;
+}
+.makeFriendAva01{
+  margin-right: -15px;
+}
+.makeFriendAva02{
+  margin-right: -5px;
+  z-index: 1;
+}
+.makeFriendAva03{
+  margin-left: -10px;
+}
+.makeFriendBg{
+  color: #5486db;
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+.togetherPayBg{
+  color: #8e4685;
+  background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
 }
 </style>
