@@ -15,7 +15,7 @@ const routes = [
 
   {
     path: '/',
-    redirect: '/home'
+    redirect: '/home/index'
   },
   {
     path: '/home',
@@ -25,7 +25,8 @@ const routes = [
       path: 'index',
       component: HomeIndex,
       meta: {
-        title: '首页面'
+        title: '首页面',
+        noNeedLogin: true
       }
     },
     {
@@ -33,7 +34,8 @@ const routes = [
       path: 'find',
       component: HomeFind,
       meta: {
-        title: '发现'
+        title: '发现',
+        noNeedLogin: true
       }
     },
     {
@@ -41,7 +43,8 @@ const routes = [
       path: 'person',
       component: HomePerson,
       meta: {
-        title: '个人中心'
+        title: '个人中心',
+        noNeedLogin: true
       }
     }
     ]
@@ -56,12 +59,14 @@ const routes = [
     children: [{
       name: 'login-form',
       path: 'loginform',
-      component: LoginForm
+      component: LoginForm,
+      meta: { noNeedLogin: true }
     },
     {
       name: 'register-form',
       path: 'registerform',
-      component: RegisterForm
+      component: RegisterForm,
+      meta: { noNeedLogin: true }
     }
     ]
   },
@@ -70,7 +75,8 @@ const routes = [
     name: 'fight',
     component: () => import('@/views/FightView'),
     meta: {
-      title: '抗击疫情'
+      title: '抗击疫情',
+      meta: { noNeedLogin: true }
     }
   },
   {

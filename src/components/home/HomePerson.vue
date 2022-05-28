@@ -56,12 +56,13 @@
         <img src="./imgs/right-icon.png" alt="" class="right-icon" />
       </div>
     </div>
+    <fan-loading v-if="loadingStatus"></fan-loading>
   </div>
 </template>
 
 <script>
 import { getDefaultAvatarUrl } from '@/utils/tools'
-import { getJwtToken } from '@/utils/token'
+import { clearStorageAndRelogin, getJwtToken } from '@/utils/token'
 import { getUserInfo } from '@/api/user'
 import { getPersonMenuInfo } from '@/api/home'
 export default {
@@ -71,8 +72,10 @@ export default {
     return {
       // 用户登录状态
       loginStatus: false,
+      loadingStatus: true,
       userInfo: {
-        avatar: getDefaultAvatarUrl()
+        avatar: getDefaultAvatarUrl(),
+        nickname: '没有登录哦~ 点击登录！'
       },
       menuInfo: {}
     }
@@ -93,14 +96,30 @@ export default {
     }
 
     this.menuInfo = await getPersonMenuInfo()
+
+    this.loadingStatus = false
   },
   methods: {
     toLogin () {
       this.$router.push('/login/loginform')
     },
     doSomeThing (action, href) {
-      if (action === 'nextPage') {
-        this.$router.push(href)
+      switch (action) {
+        case 'nextPage':
+          this.$router.push(href)
+          break
+        case 'logout':
+          this.$dialog
+            .confirm({
+              message: '确认退出登录吗？'
+            })
+            .then(() => {
+              clearStorageAndRelogin()
+            })
+            .catch(() => {
+              console.log('cancel logout')
+            })
+          break
       }
     }
   }

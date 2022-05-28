@@ -109,7 +109,7 @@ export default {
     handleClickCate (cid) {
       console.log(cid)
       this.cateIndex = cid
-      var bg = 'background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%)'
+      let bg = 'background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%)'
       switch (cid) {
         case 9:
           bg = 'background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);'

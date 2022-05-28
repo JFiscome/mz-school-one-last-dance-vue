@@ -1,6 +1,8 @@
 <template>
   <div class="view-container">
-    <router-view></router-view>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
     <bottom-text></bottom-text>
     <van-tabbar v-model="active" route placeholder>
       <van-tabbar-item icon="wap-home" to="/home/index">首页</van-tabbar-item>

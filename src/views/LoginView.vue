@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import MoreLogin from '../components/MoreLogin.vue'
+import MoreLogin from '@/components/login/MoreLogin.vue'
 
 export default {
   name: 'LoginView',
@@ -33,7 +33,6 @@ export default {
     }
   },
   created () {
-    console.log(this.$route)
     if (this.$route.name === 'register-form') {
       this.moreLoginShowStatus = false
     }

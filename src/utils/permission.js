@@ -1,9 +1,19 @@
 import router from '@/router'
-import { getJwtToken } from './token'
+import {
+  getJwtToken
+} from './token'
+
+// 路由白名单 无需登录即可访问的页面
 
 // 路由全局前置守卫
 router.beforeEach((to, from, next) => {
   const jwtToken = getJwtToken()
+  console.log(to)
+
+  if (!to.meta.noNeedLogin && !jwtToken) {
+    next('login/loginform')
+  }
+
   if (to.name === 'login' && jwtToken) {
     next('/')
   } else {

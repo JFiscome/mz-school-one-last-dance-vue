@@ -1,13 +1,13 @@
 <template>
   <div class="more-login-container">
     <div class="box">
-      <img src="./../assets/imgs/icons/github.png" class="icon" alt="" />
+      <img src="@/assets/imgs/icons/github.png" class="icon" alt="" />
     </div>
     <div class="box">
-      <img src="./../assets/imgs/icons/qq.png" class="icon" alt="" />
+      <img src="@/assets/imgs/icons/qq.png" class="icon" alt="" />
     </div>
     <div class="box">
-      <img src="./../assets/imgs/icons/wechat.png" class="icon" alt="" />
+      <img src="@/assets/imgs/icons/wechat.png" class="icon" alt="" />
     </div>
   </div>
 </template>
