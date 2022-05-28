@@ -2,7 +2,7 @@
   <div class="fight-container">
     <top-header
       class="top-fixed"
-      :diy-title="info.diyTitle"
+      :diy-title="info.diyTitleq"
       :content="info.content"
     ></top-header>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="publish-container">
     <van-nav-bar
-      title="标题"
+      title="新文章"
       left-text="返回"
       right-text="发布"
       left-arrow
@@ -11,7 +11,7 @@
       placeholder
     />
 
-    <div class="handle-container">
+      <div class="handle-container">
       <van-field
         placeholder="请输入你想说的悄悄话~"
         maxlength="520"
@@ -65,13 +65,8 @@ export default {
 <style scoped>
 .publish-container {
   width: 750px;
-  height: 100vh;
-  background-image: linear-gradient(
-    to top,
-    #fad0c4 0%,
-    #fad0c4 1%,
-    #ffd1ff 100%
-  );
+  min-height: 100vh;
+  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
 }
 
 .handle-container {
