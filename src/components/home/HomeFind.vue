@@ -22,7 +22,7 @@
 
     <div class="makeFriendsContainer">
       <!--红人馆-->
-      <div class="friendItem">
+      <div class="friendItem redPerson">
         <div class="friendTitle">红人馆</div>
         <div class="friendInPlay">
           <div class="friendPlayLeft">
@@ -31,6 +31,8 @@
           </div>
           <div class="friendPlayRight">
             <van-icon color="red" name="fire" />16832
+            <div></div>
+            <div></div>
           </div>
         </div>
       </div>
@@ -39,7 +41,8 @@
         <div class="friendTitle">交友墙</div>
         <div class="friendInPlay">
           <div class="friendPlayLeft">
-            Ta们正在线
+            <img class="friendImg makeFriendAva01 itemHidden" src="@/assets/imgs/fight/star.png" >
+            <div class="marginLf-18">Ta们正在线</div>
           </div>
           <div class="friendPlayRight makeFriendRight">
             <img class="friendImg makeFriendAva01" src="@/assets/imgs/fight/star.png" >
@@ -53,7 +56,13 @@
         <div class="friendTitle">一起去</div>
         <div class="friendInPlay">
           <div class="friendPlayLeft">
-            结伴去旅行
+            <img class="friendImg makeFriendAva01 itemHidden" src="@/assets/imgs/fight/star.png" >
+            <div class="marginLf-18">结伴去旅行</div>
+          </div>
+          <div class="friendPlayRight makeFriendRight itemHidden" >
+            <img class="friendImg makeFriendAva01" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg makeFriendAva02" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg makeFriendAva03" src="@/assets/imgs/fight/star.png" >
           </div>
         </div>
       </div>
@@ -130,11 +139,13 @@ export default {
 
 /*校园交友*/
 .makeFriendsContainer{
-  display: flex;
+  height: 160px;
+  white-space: nowrap;
+  overflow-x: scroll;
 }
 .friendItem{
-  margin: 6px;
-  display: flex;
+  margin: 0px 20px;
+  display: inline-block;
   flex-direction: column;
   width: 250px;
   height: 140px;
@@ -150,10 +161,13 @@ export default {
   transition: all 0.3s;
 }
 .friendImg{
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   margin-right: 4px;
+}
+.redPerson{
+  margin-top: 10px;
 }
 .friendTitle{
   font-weight: bold;
@@ -183,6 +197,14 @@ export default {
 }
 .makeFriendAva03{
   margin-left: -10px;
+}
+
+/*其他属性*/
+.marginLf-18{
+  margin-left: -15px;
+}
+.itemHidden{
+  visibility: hidden;
 }
 .makeFriendBg{
   color: #5486db;
