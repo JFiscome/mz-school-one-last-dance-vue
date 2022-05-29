@@ -18,8 +18,8 @@
       </div>
     </div>
 
-    <find-title hot-title="校园交友"></find-title>
-
+    <!-- 校园交友 -->
+    <find-title hot-title="校园交友" :is-show-more="false"></find-title>
     <div class="makeFriendsContainer">
       <!--红人馆-->
       <div class="friendItem redPerson">
@@ -67,6 +67,43 @@
         </div>
       </div>
     </div>
+
+    <!--热门话题-->
+    <find-title></find-title>
+    <div class="hotContainer">
+      <div class="hotItem">
+        <img class="hotImg" :src="userInfo.avatar" />
+        <div class="hotRight">
+          <div class="hotTitle">#最近循环播放的音乐</div>
+          <div class="hotPersonNum">19323人正在参与</div>
+        </div>
+      </div>
+      <div class="hotItem">
+        <img class="hotImg" :src="userInfo.avatar" />
+        <div class="hotRight">
+          <div class="hotTitle">#最近循环播</div>
+          <div class="hotPersonNum">19323人正在参与</div>
+        </div>
+      </div>
+      <div class="hotItem">
+        <img class="hotImg" :src="userInfo.avatar" />
+        <div class="hotRight">
+          <div class="hotTitle">#最近循环播</div>
+          <div class="hotPersonNum">19323人正在参与</div>
+        </div>
+      </div>
+      <div class="hotItem">
+        <img class="hotImg" :src="userInfo.avatar" />
+        <div class="hotRight">
+          <div class="hotTitle">#最近循环播</div>
+          <div class="hotPersonNum">19323人正在参与</div>
+        </div>
+      </div>
+    </div>
+
+    <!--校园达人-->
+    <find-title hot-title="校园达人"></find-title>
+
   </div>
 </template>
 
@@ -139,7 +176,7 @@ export default {
 
 /*校园交友*/
 .makeFriendsContainer{
-  height: 190px;
+  height: 200px;
   white-space: nowrap;
   overflow-x: scroll;
 }
@@ -205,6 +242,43 @@ export default {
 }
 .makeFriendAva03{
   margin-left: -10px;
+}
+
+/* 热门话题 */
+.hotContainer{
+  display: flex;
+  padding: 30px;
+  margin: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+.hotItem{
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+.hotImg{
+  width: 66px;
+  height: 66px;
+  margin-right: 10px;
+  border-radius: 10px;
+}
+.hotRight{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 4px;
+}
+.hotTitle{
+  font-weight: bold;
+  font-size: 28px;
+}
+.hotPersonNum{
+  font-size: 20px;
+  margin-top: 4px;
+  color: #acacac;
 }
 
 /*其他属性*/
