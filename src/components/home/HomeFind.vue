@@ -139,9 +139,17 @@ export default {
 
 /*校园交友*/
 .makeFriendsContainer{
-  height: 160px;
+  height: 190px;
   white-space: nowrap;
   overflow-x: scroll;
+}
+/* 隐藏滚动条 */
+.makeFriendsContainer::-webkit-scrollbar {
+  width: 0 !important;
+  /*兼容IE 10+*/
+  -ms-overflow-style: none;
+  /*兼容Firefox*/
+  overflow: -moz-scrollbars-none;
 }
 .friendItem{
   margin: 0px 20px;
