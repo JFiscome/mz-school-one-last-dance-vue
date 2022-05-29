@@ -103,7 +103,39 @@
 
     <!--校园达人-->
     <find-title hot-title="校园达人"></find-title>
+    <div class="schoolTalentContainer">
+      <div class="schoolTalentItem" v-for="item in 3" :key="item">
+        <img class="talentAvatar" :src="userInfo.avatar" alt="">
+        <div class="talentDescribe">
+          <div class="talentName">一起撸猫猫</div>
+          <van-icon class="talentGender" name="search" />
+        </div>
+        <div class="talentTagBox">
+          <div class="talentTagItem">优雅恋人</div>
+        </div>
+        <div class="followBtn">关注</div>
+      </div>
+    </div>
 
+    <!--今日动态-->
+    <find-title hot-title="今日动态"></find-title>
+    <div class="dynamicContainer">
+      <div class="dynamicItem">
+        <div class="dynamicTopBox">
+          <img class="dynamicAvatar" :src="userInfo.avatar" alt="">
+
+          <div class="userDescribe">
+            <div class="userName">Summer</div>
+            <div class="constellationBox">
+              <van-icon class="constellationIcon" name="search" />
+              <div class="constellationName">狮子座</div>
+            </div>
+          </div>
+
+          <div class="publishTime">24分钟前</div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -248,11 +280,11 @@ export default {
 .hotContainer{
   display: flex;
   padding: 30px;
-  margin: 20px;
+  margin: 20px 20px 40px;
   flex-wrap: wrap;
   justify-content: space-between;
   background: #FFFFFF;
-  border-radius: 10px;
+  border-radius: 16px;
 }
 .hotItem{
   display: flex;
@@ -279,6 +311,101 @@ export default {
   font-size: 20px;
   margin-top: 4px;
   color: #acacac;
+}
+/* 校园达人 */
+.schoolTalentContainer{
+  display: flex;
+  margin: 10px;
+}
+.schoolTalentItem{
+  width: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #FFFFFF;
+  padding: 20px 20px 36px 20px;
+  margin: 10px;
+  border-radius: 10px;
+}
+.talentAvatar{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+.talentDescribe{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.talentName{
+ font-size: 28px;
+  font-weight: bold;
+  margin: 20px 10px 20px 0;
+}
+.talentTagBox{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.talentTagItem{
+  border: 1px solid orange;
+  color: orange;
+  font-size: 20px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 2px 4px;
+}
+.followBtn{
+  font-size: 24px;
+  background: orange;
+  padding: 6px 18px;
+  border-radius: 24px;
+  color: #FFFFFF;
+}
+
+/*校园达人*/
+.dynamicContainer{
+  background: #FFFFFF;
+  padding: 20px;
+}
+.dynamicItem{
+}
+.dynamicTopBox{
+  display: flex;
+  align-items: center;
+}
+.dynamicAvatar{
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.userDescribe{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userName{
+  font-size: 26px;
+  font-weight: bold;
+}
+.constellationBox{
+  display: flex;
+  color: #999999;
+  align-items: center;
+}
+.constellationName{
+  font-size: 18px;
+}
+.publishTime{
+  font-size: 20px;
+margin-left: auto;
+  color: #999999;
 }
 
 /*其他属性*/
