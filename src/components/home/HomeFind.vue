@@ -26,7 +26,7 @@
         <div class="friendTitle">红人馆</div>
         <div class="friendInPlay">
           <div class="friendPlayLeft">
-            <img class="friendImg" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg" :src="userInfo.avatar" >
             Luffy
           </div>
           <div class="friendPlayRight">
@@ -45,9 +45,9 @@
             <div class="marginLf-18">Ta们正在线</div>
           </div>
           <div class="friendPlayRight makeFriendRight">
-            <img class="friendImg makeFriendAva01" src="@/assets/imgs/fight/star.png" >
-            <img class="friendImg makeFriendAva02" src="@/assets/imgs/fight/star.png" >
-            <img class="friendImg makeFriendAva03" src="@/assets/imgs/fight/star.png" >
+            <img class="friendImg makeFriendAva01" :src="userInfo.avatar" >
+            <img class="friendImg makeFriendAva02" :src="userInfo.avatar" >
+            <img class="friendImg makeFriendAva03" :src="userInfo.avatar" >
           </div>
         </div>
       </div>
