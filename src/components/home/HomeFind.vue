@@ -123,7 +123,6 @@
       <div class="dynamicItem">
         <div class="dynamicTopBox">
           <img class="dynamicAvatar" :src="userInfo.avatar" alt="">
-
           <div class="userDescribe">
             <div class="userName">Summer</div>
             <div class="constellationBox">
@@ -131,8 +130,37 @@
               <div class="constellationName">狮子座</div>
             </div>
           </div>
-
           <div class="publishTime">24分钟前</div>
+        </div>
+
+        <div class="dynamicTitle">
+          <van-icon class="dynamicTitleIcon" name="search" />
+          <div class="dynamicTitleText">2022 读书计划</div>
+        </div>
+
+        <div class="dynamicContent">
+          <div class="imgContainer">
+            <img class="dynamicContentImg" v-for="item in 5" :key="item" :src="userInfo.avatar" alt="">
+          </div>
+          <div class="dynamicContentText">
+            读书，是在你的内心深处播下一颗种子，当种子发芽后就变成了知识。知识，哪怕是知识的幻影，也会成为你的铠甲，保护你不被愚昧反噬（来自《William Johnson Cory对教育本质的定义》）。
+          </div>
+        </div>
+
+        <div class="dynamicBar">
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="share-o" />
+            <div class="dynamicBarNum">3</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="17.6" name="comment-o" />
+            <div class="dynamicBarNum">66</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="good-job-o" />
+            <div class="dynamicBarNum">320</div>
+          </div>
+          <van-icon size="18" class="dynamicBarMore" name="ellipsis"></van-icon>
         </div>
       </div>
     </div>
@@ -285,6 +313,8 @@ export default {
   justify-content: space-between;
   background: #FFFFFF;
   border-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 .hotItem{
   display: flex;
@@ -315,7 +345,7 @@ export default {
 /* 校园达人 */
 .schoolTalentContainer{
   display: flex;
-  margin: 10px;
+  margin: 10px 10px 20px;
 }
 .schoolTalentItem{
   width: 220px;
@@ -327,6 +357,8 @@ export default {
   padding: 20px 20px 36px 20px;
   margin: 10px;
   border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+
 }
 .talentAvatar{
   width: 100px;
@@ -367,10 +399,12 @@ export default {
   color: #FFFFFF;
 }
 
-/*校园达人*/
+/*今日动态*/
 .dynamicContainer{
   background: #FFFFFF;
-  padding: 20px;
+  margin-top: 20px;
+  padding: 26px 30px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 .dynamicItem{
 }
@@ -404,8 +438,52 @@ export default {
 }
 .publishTime{
   font-size: 20px;
-margin-left: auto;
+  margin-left: auto;
   color: #999999;
+}
+.dynamicTitle{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.dynamicTitleText{
+  font-size: 26px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+.imgContainer{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.dynamicContentImg{
+  width: 220px;
+  height: 220px;
+  margin: 5px;
+  border-radius: 10px;
+}
+.dynamicContentText{
+  font-size: 30px;
+  margin: 20px 0px 20px 8px;
+}
+
+.dynamicBar{
+  display: flex;
+  padding: 20px 0 0 10px;
+  align-items: center;
+}
+.dynamicBarItem{
+  margin-right:80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dynamicBarNum{
+  margin-left: 8px;
+  font-size: 28px;
+}
+.dynamicBarMore{
+  margin-left: auto;
 }
 
 /*其他属性*/
