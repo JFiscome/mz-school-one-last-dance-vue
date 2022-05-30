@@ -57,6 +57,16 @@ export default {
       options: [
         { id: 1, text: '位置', icon: 'location' },
         { id: 2, text: '公开', icon: 'friends' }
+      ],
+      categoryBgList: [
+        'background-image: linear-gradient(to right, #434343 0%, black 100%);',
+        'background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);',
+        'background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);',
+        'background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);',
+        'background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);',
+        'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);',
+        'background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);',
+        'background-image: linear-gradient(to top, #505285 0%, #585e92 12%, #65689f 25%, #7474b0 37%, #7e7ebb 50%, #8389c7 62%, #9795d4 75%, #a2a1dc 87%, #b5aee4 100%);'
       ]
     }
   },
@@ -109,33 +119,8 @@ export default {
     handleClickCate (cid) {
       console.log(cid)
       this.cateIndex = cid
-      let bg = 'background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%)'
-      switch (cid) {
-        case 9:
-          bg = 'background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);'
-          break
-        case 10:
-          bg = 'background-image: linear-gradient(to top, #a18cd1 0%, #fbc2eb 100%);'
-          break
-        case 11:
-          bg = 'background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);'
-          break
-        case 12:
-          bg = 'background-image: linear-gradient(to top, #0c3483 0%, #a2b6df 100%, #6b8cce 100%, #a2b6df 100%);'
-          break
-        case 13:
-          bg = 'background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);'
-          break
-        case 14:
-          bg = 'background-image: linear-gradient(to top, #88d3ce 0%, #6e45e2 100%);'
-          break
-        case 15:
-          bg = 'background-image: linear-gradient(to top, #505285 0%, #585e92 12%, #65689f 25%, #7474b0 37%, #7e7ebb 50%, #8389c7 62%, #9795d4 75%, #a2a1dc 87%, #b5aee4 100%);'
-          break
-        case 16:
-          bg = 'background-image: linear-gradient(to right, #434343 0%, black 100%);'
-          break
-      }
+      const bg = this.categoryBgList[cid % this.categoryList.length]
+      console.log(cid % this.categoryList.length)
       document.querySelector('.moodContainer').setAttribute('style', bg)
     }
   }
@@ -148,8 +133,8 @@ export default {
   min-height: 100vh;
   display: flex;
   /*background-image: linear-gradient(120deg, #43e57f 0%, #98d7f1 100%);*/
-  background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);
-  /*background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);*/
+  /*background-image: linear-gradient(to right, #fa709a 0%, #fee140 100%);*/
+  background-image: radial-gradient(circle 248px at center, #16d9e3 0%, #30c7ec 47%, #46aef7 100%);
   flex-direction: column;
   align-items: center;
   transition: background-color 2s;
