@@ -143,7 +143,7 @@ export default {
       poster: [],
       searchText: '',
       dynamicList: [],
-      page: 9,
+      page: 1,
       size: 10
     }
   },
