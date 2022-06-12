@@ -72,6 +72,7 @@
     </div>
     <fan-loading v-if="loadingStatus"></fan-loading>
 
+    <find-title hot-title="今日动态"></find-title>
     <div class="dynamicContainer">
       <div class="dynamicItem" v-for="item in dynamicList" :key="item.aid">
         <div class="dynamicTopBox">
@@ -98,7 +99,8 @@
             </div>
           </div>
           <div class="dynamicContentText">
-            {{ item.content}}          </div>
+            {{ item.content}}
+          </div>
         </div>
 
         <div class="dynamicBar">
@@ -125,12 +127,13 @@
 <script>
 import { Swipe, SwipeItem } from 'vant'
 import { getBannerList, getCateInfo, getDynamicList } from '@/api/home'
-
+import FindTitle from '@/commonCommonponents/FindTitle'
 export default {
   name: 'HomeIndex',
   components: {
     VanSwipe: Swipe,
-    VanSwipeItem: SwipeItem
+    VanSwipeItem: SwipeItem,
+    FindTitle
   },
   data () {
     return {
@@ -248,6 +251,7 @@ export default {
 .poster-container {
   width: 690px;
   margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .poster-img {
@@ -259,7 +263,7 @@ export default {
 /*今日动态*/
 .dynamicContainer{
   width: 690px;
-  margin: 40px 30px 30px 30px;
+  margin: 0px 30px 30px 30px;
   box-sizing: border-box;
 }
 .dynamicItem{
