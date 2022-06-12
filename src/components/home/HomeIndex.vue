@@ -110,7 +110,7 @@
           </div>
           <div class="dynamicBarItem">
             <van-icon size="17.6" name="comment-o" />
-            <div class="dynamicBarNum">66</div>
+            <div class="dynamicBarNum">62</div>
           </div>
           <div class="dynamicBarItem">
             <van-icon size="18" name="good-job-o" />
