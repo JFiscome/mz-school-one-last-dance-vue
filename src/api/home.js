@@ -44,3 +44,11 @@ export async function publishMood (cid, content, pics) {
   })
   return res
 }
+
+export async function getDynamicList (cid = 1, page = 1, size = 10, status = 2) {
+  const res = await axiosInstance({
+    url: `article/list?cid=${cid}&page=${page}&size=${size}&status=${status}`,
+    method: 'GET'
+  })
+  return res
+}

@@ -57,27 +57,74 @@
       indicator-color="white"
     >
       <van-swipe-item v-for="(item, index) in bannerList" :key="index">
-        <img :src="item.imageUrl" class="banner-img" />
+        <img :src="item.imageUrl" class="banner-img"/>
       </van-swipe-item>
     </van-swipe>
     <div class="category-container round-box child-verticle-horizontal-center-row">
       <div class="cate-box child-verticle-horizontal-center-column" v-for="item in cateList" :key="item.cid">
-          <img :src="item.icon" class="cate-icon" alt="">
-          <div class="cate-title">{{item.title}}</div>
+        <img :src="item.icon" class="cate-icon" alt="">
+        <div class="cate-title">{{ item.title }}</div>
       </div>
     </div>
 
     <div class="poster-container child-verticle-between-horizontal-center">
-      <img  v-for="item in poster" :key="item.title" :src="item.imgUrl" alt="" class="poster-img">
+      <img v-for="item in poster" :key="item.title" :src="item.imgUrl" alt="" class="poster-img">
     </div>
-
     <fan-loading v-if="loadingStatus"></fan-loading>
+
+    <div class="dynamicContainer">
+      <div class="dynamicItem" v-for="item in dynamicList" :key="item.aid">
+        <div class="dynamicTopBox">
+          <img class="dynamicAvatar" :src="item.avatar" alt="">
+          <div class="userDescribe">
+            <div class="userName">{{ item.nickname }}</div>
+            <div class="constellationBox">
+<!--              <van-icon class="constellationIcon" name="search" />-->
+<!--              <div class="constellationName">狮子座</div>-->
+            </div>
+          </div>
+          <div class="publishTime">{{ timestampToTime(item.createTime) }}</div>
+        </div>
+
+<!--        <div class="dynamicTitle">-->
+<!--          <van-icon class="dynamicTitleIcon" name="search" />-->
+<!--          <div class="dynamicTitleText">2022 读书计划</div>-->
+<!--        </div>-->
+
+        <div class="dynamicContent">
+          <div class="imgContainer" >
+            <div v-if="item.pics != null && item.pics.length > 0">
+              <img  class="dynamicContentImg" v-for="(picsItem,index) in JSON.parse(item.pics)" :key="index"  :src="picsItem" alt="">
+            </div>
+          </div>
+          <div class="dynamicContentText">
+            {{ item.content}}          </div>
+        </div>
+
+        <div class="dynamicBar">
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="share-o" />
+            <div class="dynamicBarNum">3</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="17.6" name="comment-o" />
+            <div class="dynamicBarNum">66</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="good-job-o" />
+            <div class="dynamicBarNum">{{ item.hotScore }}</div>
+          </div>
+          <van-icon size="18" class="dynamicBarMore" name="ellipsis"></van-icon>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
 import { Swipe, SwipeItem } from 'vant'
-import { getBannerList, getCateInfo } from '@/api/home'
+import { getBannerList, getCateInfo, getDynamicList } from '@/api/home'
 
 export default {
   name: 'HomeIndex',
@@ -90,7 +137,11 @@ export default {
       loadingStatus: true,
       bannerList: [],
       cateList: [],
-      poster: []
+      poster: [],
+      searchText: '',
+      dynamicList: [],
+      page: 9,
+      size: 10
     }
   },
   async created () {
@@ -103,7 +154,27 @@ export default {
     this.cateList = cateList
     this.poster = poster
 
+    this.getDynamicList(1)
+
     this.loadingStatus = false
+  },
+  methods: {
+    async getDynamicList (cid = 1) {
+      const result = await getDynamicList(cid, this.page, this.size, 2)
+      this.dynamicList = result.list
+      console.log(result)
+    },
+    timestampToTime (timestamp) {
+      // 计算年月日时分的函数
+      const date = new Date(timestamp)
+      const Y = date.getFullYear() + '-'
+      const M = (date.getMonth() + 1) + '-'
+      const D = date.getDate() + ' '
+      const h = date.getHours() + ':'
+      const m = date.getMinutes() + ':'
+      const s = date.getSeconds()
+      return Y + M + D + h + m + s
+    }
   }
 }
 </script>
@@ -163,7 +234,7 @@ export default {
   height: 80px;
 }
 
-.cate-box:active{
+.cate-box:active {
   border-radius: 12px;
   background-color: #eee;
 }
@@ -183,5 +254,112 @@ export default {
   width: 340px;
   height: 160px;
   border-radius: 20px;
+}
+
+/*今日动态*/
+.dynamicContainer{
+  width: 690px;
+  margin: 40px 30px 30px 30px;
+  box-sizing: border-box;
+}
+.dynamicItem{
+  margin-top: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  background: #FFFFFF;
+  padding: 26px 30px;
+  border-radius: 10px;
+}
+.dynamicTopBox{
+  display: flex;
+  align-items: center;
+}
+.dynamicAvatar{
+  width: 76px;
+  height: 76px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+.userDescribe{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.userName{
+  font-size: 26px;
+  font-weight: bold;
+}
+.constellationBox{
+  display: flex;
+  color: #999999;
+  align-items: center;
+}
+.constellationName{
+  font-size: 18px;
+}
+.publishTime{
+  font-size: 20px;
+  margin-left: auto;
+  color: #999999;
+}
+.dynamicTitle{
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+}
+.dynamicTitleText{
+  font-size: 26px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+.imgContainer{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+}
+.dynamicContentImg{
+  width: 200px;
+  height: 200px;
+  margin: 5px;
+  border-radius: 10px;
+}
+.dynamicContentText{
+  font-size: 30px;
+  margin: 20px 0px 20px 8px;
+}
+
+.dynamicBar{
+  display: flex;
+  padding: 20px 0 0 10px;
+  align-items: center;
+}
+.dynamicBarItem{
+  margin-right:80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dynamicBarNum{
+  margin-left: 8px;
+  font-size: 28px;
+}
+.dynamicBarMore{
+  margin-left: auto;
+}
+
+/*其他属性*/
+.marginLf-18{
+  margin-left: -15px;
+}
+.itemHidden{
+  visibility: hidden;
+}
+.makeFriendBg{
+  color: #5486db;
+  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+}
+.togetherPayBg{
+  color: #8e4685;
+  background-image: linear-gradient(to top, #fdcbf1 0%, #fdcbf1 1%, #e6dee9 100%);
 }
 </style>
