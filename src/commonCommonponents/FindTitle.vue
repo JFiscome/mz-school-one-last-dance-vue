@@ -31,6 +31,7 @@ export default {
 
 <style scoped>
 .titleContainer{
+  width: 690px;
   display: flex;
   align-items: center;
   padding:20px 30px 15px 30px;

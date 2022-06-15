@@ -57,7 +57,7 @@
       indicator-color="white"
     >
       <van-swipe-item v-for="(item, index) in bannerList" :key="index">
-        <img :src="item.imageUrl" class="banner-img" />
+        <img :src="item.imageUrl" class="banner-img"/>
       </van-swipe-item>
     </van-swipe>
     <div
@@ -89,7 +89,57 @@
 
   <img src="" alt="">
     <fan-loading v-if="loadingStatus"></fan-loading>
+
+    <find-title hot-title="今日动态"></find-title>
+    <div class="dynamicContainer">
+      <div class="dynamicItem" v-for="item in dynamicList" :key="item.aid">
+        <div class="dynamicTopBox">
+          <img class="dynamicAvatar" :src="item.avatar" alt="">
+          <div class="userDescribe">
+            <div class="userName">{{ item.nickname }}</div>
+            <div class="constellationBox">
+<!--              <van-icon class="constellationIcon" name="search" />-->
+<!--              <div class="constellationName">狮子座</div>-->
+            </div>
+          </div>
+          <div class="publishTime">{{ timestampToTime(item.createTime) }}</div>
+        </div>
+
+<!--        <div class="dynamicTitle">-->
+<!--          <van-icon class="dynamicTitleIcon" name="search" />-->
+<!--          <div class="dynamicTitleText">2022 读书计划</div>-->
+<!--        </div>-->
+
+        <div class="dynamicContent">
+          <div class="imgContainer" >
+            <div v-if="item.pics != null && item.pics.length > 0">
+              <img  class="dynamicContentImg" v-for="(picsItem,index) in JSON.parse(item.pics)" :key="index"  :src="picsItem" alt="">
+            </div>
+          </div>
+          <div class="dynamicContentText">
+            {{ item.content}}
+          </div>
+        </div>
+
+        <div class="dynamicBar">
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="share-o" />
+            <div class="dynamicBarNum">3</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="17.6" name="comment-o" />
+            <div class="dynamicBarNum">62</div>
+          </div>
+          <div class="dynamicBarItem">
+            <van-icon size="18" name="good-job-o" />
+            <div class="dynamicBarNum">{{ item.hotScore }}</div>
+          </div>
+          <van-icon size="18" class="dynamicBarMore" name="ellipsis"></van-icon>
+        </div>
+      </div>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -217,6 +267,7 @@ export default {
 .poster-container {
   width: 690px;
   margin-top: 30px;
+  margin-bottom: 40px;
 }
 
 .poster-img {
