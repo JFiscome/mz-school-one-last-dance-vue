@@ -33,7 +33,7 @@
             p-id="3400"
           ></path>
         </svg>
-        <div class="top-title">【湄洲湾】职业技术学院</div>
+        <div class="top-title">湄洲湾职业技术学院</div>
       </div>
       <svg
         t="1653634111239"
@@ -60,37 +60,62 @@
         <img :src="item.imageUrl" class="banner-img" />
       </van-swipe-item>
     </van-swipe>
-    <div class="category-container round-box child-verticle-horizontal-center-row">
-      <div class="cate-box child-verticle-horizontal-center-column" v-for="item in cateList" :key="item.cid">
-          <img :src="item.icon" class="cate-icon" alt="">
-          <div class="cate-title">{{item.title}}</div>
+    <div
+      class="category-container round-box child-verticle-horizontal-center-row"
+    >
+      <div
+        class="cate-box child-verticle-horizontal-center-column"
+        v-for="item in cateList"
+        :key="item.cid"
+      >
+        <img :src="item.icon" class="cate-icon" alt="" />
+        <div class="cate-title">{{ item.title }}</div>
       </div>
     </div>
 
     <div class="poster-container child-verticle-between-horizontal-center">
-      <img  v-for="item in poster" :key="item.title" :src="item.imgUrl" alt="" class="poster-img">
+      <img
+        v-for="item in poster"
+        :key="item.title"
+        :src="item.imgUrl"
+        alt=""
+        class="poster-img"
+      />
     </div>
 
+    <div class="article-container">
+      <article-card v-for="article in articleList" :key="article.aid" :card-item="article"></article-card>
+    </div>
+
+  <img src="" alt="">
     <fan-loading v-if="loadingStatus"></fan-loading>
   </div>
 </template>
 
 <script>
+import ArticleCard from '@/commonCommonponents/ArticleCard.vue'
 import { Swipe, SwipeItem } from 'vant'
-import { getBannerList, getCateInfo } from '@/api/home'
+import { getBannerList, getCateInfo, getArticleList } from '@/api/home'
 
 export default {
   name: 'HomeIndex',
   components: {
     VanSwipe: Swipe,
-    VanSwipeItem: SwipeItem
+    VanSwipeItem: SwipeItem,
+    ArticleCard
   },
   data () {
     return {
       loadingStatus: true,
       bannerList: [],
       cateList: [],
-      poster: []
+      poster: [],
+      // 1热门列表，2最新列表
+      articleStatus: 2,
+      articlePage: 1,
+      articleSize: 20,
+      initNoData: false,
+      articleList: []
     }
   },
   async created () {
@@ -100,10 +125,26 @@ export default {
 
     // 获取分类和海报
     const { list: cateList, poster } = await getCateInfo()
+    // 获取文章列表
+    await this.nextArticle()
     this.cateList = cateList
     this.poster = poster
-
     this.loadingStatus = false
+  },
+
+  methods: {
+    async nextArticle () {
+      const list = await getArticleList(
+        this.articlePage,
+        this.articleSize,
+        this.articleStatus
+      )
+      if (list.length < this.articleSize) {
+        // 没有更多数据了
+        this.initNoData = true
+      }
+      this.articleList.push(...list)
+    }
   }
 }
 </script>
@@ -135,7 +176,6 @@ export default {
 
 .banner-container {
   width: 690px;
-  height: 320px;
   background-color: blueviolet;
   margin: 30px 0;
 }
@@ -163,7 +203,7 @@ export default {
   height: 80px;
 }
 
-.cate-box:active{
+.cate-box:active {
   border-radius: 12px;
   background-color: #eee;
 }
@@ -183,5 +223,20 @@ export default {
   width: 340px;
   height: 160px;
   border-radius: 20px;
+}
+
+.article-container {
+  width: 690px;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  overflow: hidden;
+  background-color: #f3f3f3;
+}
+
+.article-img{
+  width: 690px;
 }
 </style>

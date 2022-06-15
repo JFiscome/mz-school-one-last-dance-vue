@@ -1,8 +1,13 @@
 import axios from 'axios'
 import {
-  Notify
+  Notify,
+  Toast
 } from 'vant'
-import { getJwtToken } from './token'
+import {
+  clearStorage,
+  getJwtToken
+} from './token'
+import router from '@/router'
 const axiosInstance = axios.create({
   baseURL: 'https://www.tideway.store/dance/v1/',
   // baseURL: 'http://localhost:12000/v1/',
@@ -56,11 +61,29 @@ axiosInstance.interceptors.response.use(function (response) {
     errorMessage = [status, '服务器开小差了~'].join(':')
   } else {
     console.log(error)
-    //   用户操作的异常
+
     const {
       errorCode,
       message
     } = error.response.data
+
+    console.log('用户操作异常，token过期了')
+    if (errorCode === 403002) {
+      // 用户的凭证过期了
+      // 用旧的凭证换取新的凭证
+      // 我们这边换一种方式
+      // 删除旧的，让用户重新登录
+      clearStorage()
+      Toast({
+        message: '登录信息已过期，请重新登录',
+        onClose () {
+          // 执行跳转到登录页面
+          router.push('/login/loginform')
+        }
+      })
+      return false
+    }
+
     errorMessage = [errorCode, message].join(':')
   }
   Notify(errorMessage)

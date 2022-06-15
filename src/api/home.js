@@ -25,6 +25,21 @@ export async function getCateInfo () {
   })
 }
 
+export async function getArticleList (page = 1, size = 20, status = 1) {
+  const {
+    list
+  } = await axiosInstance({
+    url: 'article/list',
+    params: {
+      page,
+      size,
+      status
+    }
+  })
+  console.log('artilce List:::', list)
+  return list
+}
+
 /**
  * 发布心情
  * @param cid 分类id

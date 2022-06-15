@@ -13,6 +13,10 @@ export function getJwtToken () {
   return localStorage.getItem(USER_TOKEN_KEY)
 }
 
+export function clearStorage () {
+  return localStorage.clear()
+}
+
 export function clearStorageAndRelogin () {
   localStorage.clear()
   Toast.success({
